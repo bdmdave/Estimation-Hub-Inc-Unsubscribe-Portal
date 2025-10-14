@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You | Estimation Hub Inc.</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background-color: #ffffff;
+      color: #002b5c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      margin: 0;
+    }
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 15px;
+      color: #444;
+      max-width: 500px;
+      line-height: 1.6;
+    }
+    a {
+      margin-top: 20px;
+      text-decoration: none;
+      background-color: #0056b3;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    a:hover {
+      background-color: #003f87;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Thank You!</h1>
+  <p>Your preferences have been updated successfully.<br><br>
+  We appreciate your time and respect your choices.<br><br>
+  — <strong>David Alonso</strong><br>
+  Director of Business Development<br>
+  Estimation Hub Inc.</p>
+
+  <a href="https://estimationhubinc.com">Return to Company Website</a>
+
+</body>
+</html>
