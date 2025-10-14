@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unsubscribe | Estimation Hub Inc.</title>
+  <title>Manage Your Email Preferences | Estimation Hub Inc.</title>
   <style>
     body {
       font-family: Verdana, sans-serif;
       background-color: #ffffff;
-      color: #003366;
+      color: #002b5c;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -16,12 +16,6 @@
       min-height: 100vh;
       margin: 0;
       text-align: center;
-      padding: 20px;
-    }
-    img {
-      width: 120px;
-      height: auto;
-      margin-bottom: 20px;
     }
     h1 {
       font-size: 24px;
@@ -29,94 +23,99 @@
     }
     p {
       font-size: 15px;
-      color: #333;
+      color: #444;
       max-width: 500px;
       margin-bottom: 25px;
+      line-height: 1.5;
     }
     form {
-      background: #f7f9fb;
-      border: 1px solid #d0d7de;
+      background-color: #f9fafb;
       padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      width: 100%;
-      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.08);
+      width: 320px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #333;
     }
     input[type="email"] {
       width: 100%;
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
       font-size: 14px;
-      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .checkbox-group {
+      margin-bottom: 20px;
+    }
+    .checkbox-group label {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.1);
     }
     button {
-      background-color: #0078d7;
-      color: white;
+      background-color: #0056b3;
+      color: #fff;
       border: none;
-      padding: 10px 22px;
-      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border-radius: 4px;
       cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
+      width: 100%;
+      transition: background-color 0.3s;
     }
     button:hover {
-      background-color: #005fa3;
+      background-color: #003f87;
     }
     footer {
-      margin-top: 30px;
+      margin-top: 25px;
       font-size: 13px;
-      color: #666;
+      color: #555;
     }
-    a {
-      color: #0078d7;
+    footer a {
+      color: #0056b3;
       text-decoration: none;
     }
-    a:hover {
+    footer a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <img src="ChatGPT Image Oct 6, 2025, 09_40_47 PM.png" alt="Estimation Hub Inc. Logo">
-  <h1>Unsubscribe from Estimation Hub Inc. Emails</h1>
+
+  <h1>Manage Your Email Preferences</h1>
   <p>
-    Please enter your email address below to unsubscribe from future communications.  
-    We respect your preferences and will process your request promptly.
+    Your preferences matter to us. Please let us know what kind of communication you'd like to continue receiving.  
+    <br><br>— <strong>David Alonso</strong>
   </p>
 
-  <form id="unsubscribeForm" action="https://formspree.io/f/xblzqjar" method="POST">
-    <input type="email" name="email" placeholder="Enter your email" required />
-    <input type="hidden" name="_subject" value="Unsubscribe Request from Estimation Hub Inc." />
-    <button type="submit">Unsubscribe</button>
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="Project Estimate Updates" /> Project Estimate Updates</label>
+      <label><input type="checkbox" name="Service Promotions & Offers" /> Service Promotions & Offers</label>
+      <label><input type="checkbox" name="Company Announcements & Newsletters" /> Company Announcements & Newsletters</label>
+    </div>
+
+    <button type="submit">Save Preferences / Unsubscribe</button>
   </form>
 
   <footer>
-    <p>
-      Having issues? Contact us at  
-      <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a>
-    </p>
-    <p>© 2025 Estimation Hub Inc. All rights reserved.</p>
+    Having issues? Contact us at <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a><br>
+    © 2025 Estimation Hub Inc. All rights reserved.
   </footer>
 
-  <script>
-    document.getElementById("unsubscribeForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        window.location.href = "thankyou.html";
-      } else {
-        alert("There was an issue submitting the form. Please try again later.");
-      }
-    });
-  </script>
 </body>
 </html>
