@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unsubscribe | Estimation Hub Inc.</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background-color: #f5f6fa;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    h1 {
+      color: #111;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    button {
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .footer {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #777;
+    }
+    .footer a {
+      color: #0078D4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Manage Your Email Preferences</h1>
+    <p>If you would like to stop receiving project updates or estimates from Estimation Hub Inc., please confirm below.</p>
+
+    <form action="https://formspree.io/f/xblzqjar" method="POST">
+      <input type="email" name="email" placeholder="Your email address" required>
+      <textarea name="message" rows="3" placeholder="Reason for unsubscribing (optional)"></textarea>
+      <button type="submit">Unsubscribe</button>
+    </form>
+
+    <div class="footer">
+      <p>Need help? Contact us at 
+      <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a></p>
+      <p>© 2025 <a href="https://estimationhubinc.com" target="_blank">Estimation Hub Inc.</a></p>
+    </div>
+  </div>
+</body>
+</html>
