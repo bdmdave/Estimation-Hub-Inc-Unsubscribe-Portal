@@ -16,19 +16,57 @@
       min-height: 100vh;
       text-align: center;
       margin: 0;
+      padding: 20px;
     }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid #0056b3;
+      margin-bottom: 25px;
+      animation: pop 0.6s ease forwards;
+    }
+
+    .checkmark::after {
+      content: '';
+      width: 25px;
+      height: 12px;
+      border-left: 4px solid #0056b3;
+      border-bottom: 4px solid #0056b3;
+      transform: rotate(-45deg) scale(0);
+      animation: draw 0.5s 0.6s forwards ease-out;
+      display: block;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes draw {
+      0% { transform: rotate(-45deg) scale(0); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
     h1 {
       font-size: 26px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
+
     p {
       font-size: 15px;
       color: #444;
       max-width: 500px;
       line-height: 1.6;
+      margin-bottom: 20px;
     }
+
     a {
-      margin-top: 20px;
       text-decoration: none;
       background-color: #0056b3;
       color: white;
@@ -37,6 +75,7 @@
       font-size: 14px;
       transition: background-color 0.3s;
     }
+
     a:hover {
       background-color: #003f87;
     }
@@ -44,12 +83,16 @@
 </head>
 <body>
 
+  <div class="checkmark"></div>
+
   <h1>Thank You!</h1>
-  <p>Your preferences have been updated successfully.<br><br>
-  We appreciate your time and respect your choices.<br><br>
-  — <strong>David Alonso</strong><br>
-  Director of Business Development<br>
-  Estimation Hub Inc.</p>
+  <p>
+    Your preferences have been updated successfully.<br><br>
+    We appreciate your time and respect your choices.<br><br>
+    — <strong>David Alonso</strong><br>
+    Director of Business Development<br>
+    Estimation Hub Inc.
+  </p>
 
   <a href="https://estimationhubinc.com">Return to Company Website</a>
 
