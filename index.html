@@ -1,86 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unsubscribe | Estimation Hub Inc.</title>
   <style>
     body {
       font-family: Verdana, sans-serif;
-      background-color: #f5f6fa;
-      color: #333;
+      background-color: #ffffff;
+      color: #003366;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      min-height: 100vh;
       margin: 0;
-    }
-    .container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      width: 90%;
-      max-width: 500px;
       text-align: center;
+      padding: 20px;
+    }
+    img {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
     }
     h1 {
-      color: #111;
-      font-size: 22px;
+      font-size: 24px;
       margin-bottom: 10px;
     }
     p {
-      color: #555;
-      font-size: 14px;
+      font-size: 15px;
+      color: #333;
+      max-width: 500px;
       margin-bottom: 25px;
     }
-    input, textarea {
+    form {
+      background: #f7f9fb;
+      border: 1px solid #d0d7de;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      width: 100%;
+      max-width: 400px;
+    }
+    input[type="email"] {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 14px;
+      margin-bottom: 15px;
     }
     button {
-      background-color: #0078D4;
+      background-color: #0078d7;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s;
     }
     button:hover {
       background-color: #005fa3;
     }
-    .footer {
-      margin-top: 25px;
-      font-size: 12px;
-      color: #777;
+    footer {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #666;
     }
-    .footer a {
-      color: #0078D4;
+    a {
+      color: #0078d7;
       text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Manage Your Email Preferences</h1>
-    <p>If you would like to stop receiving project updates or estimates from Estimation Hub Inc., please confirm below.</p>
+  <img src="ChatGPT Image Oct 6, 2025, 09_40_47 PM.png" alt="Estimation Hub Inc. Logo">
+  <h1>Unsubscribe from Estimation Hub Inc. Emails</h1>
+  <p>
+    Please enter your email address below to unsubscribe from future communications.  
+    We respect your preferences and will process your request promptly.
+  </p>
 
-    <form action="https://formspree.io/f/xblzqjar" method="POST">
-      <input type="email" name="email" placeholder="Your email address" required>
-      <textarea name="message" rows="3" placeholder="Reason for unsubscribing (optional)"></textarea>
-      <button type="submit">Unsubscribe</button>
-    </form>
+  <form id="unsubscribeForm" action="https://formspree.io/f/xblzqjar" method="POST">
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <input type="hidden" name="_subject" value="Unsubscribe Request from Estimation Hub Inc." />
+    <button type="submit">Unsubscribe</button>
+  </form>
 
-    <div class="footer">
-      <p>Need help? Contact us at 
-      <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a></p>
-      <p>© 2025 <a href="https://estimationhubinc.com" target="_blank">Estimation Hub Inc.</a></p>
-    </div>
-  </div>
+  <footer>
+    <p>
+      Having issues? Contact us at  
+      <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a>
+    </p>
+    <p>© 2025 Estimation Hub Inc. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("unsubscribeForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        window.location.href = "thankyou.html";
+      } else {
+        alert("There was an issue submitting the form. Please try again later.");
+      }
+    });
+  </script>
 </body>
 </html>
