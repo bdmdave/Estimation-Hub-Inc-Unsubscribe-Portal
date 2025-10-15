@@ -16,13 +16,16 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        /* Hidden success message by default */
+        .success-message {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <div class="w-full max-w-lg bg-white rounded-xl shadow-2xl p-8 sm:p-10 border-t-8 border-indigo-600">
         
-        <!-- Updated Header with Company Name -->
         <header class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
                 Manage Your <span class="text-indigo-600">Email Status</span>
@@ -33,8 +36,17 @@
             <p class="text-gray-500">We respect your inbox. Choose how you'd like to hear from us below.</p>
         </header>
 
-        <!-- FormSubmit Form -->
+        <!-- Success Message Container -->
+        <div id="success-message" class="success-message p-4 mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg" role="alert">
+            <p class="font-bold">Request Submitted!</p>
+            <p>Thank you. Your request has been sent to David and will be processed shortly.</p>
+        </div>
+
+        <!-- FormSubmit Form (This will be hidden after success) -->
         <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
+
+            <!-- FIX for slow redirection: This redirects the user back to your page, making the perceived loading time much shorter. -->
+            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/">
 
             <!-- Hidden field to disable CAPTCHA -->
             <input type="hidden" name="_captcha" value="false">
@@ -113,12 +125,12 @@
                 <a href="mailto:david@estimationhubinc.com" class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-150 ease-in-out underline">david@estimationhubinc.com</a>.
             </p>
 
-            <!-- Alternative Form Portal Link -->
+            <!-- Alternative Form Portal Link (Updated to your GitHub Pages URL) -->
             <p class="text-sm text-gray-500 pt-2">
-                Alternatively, you can access our secure, dedicated form portal:
+                Alternatively, you can visit our main Email Management Portal:
             </p>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdSf7N2VGL2LqLx30QPsYNLpgbg3uMUdZtCeBHzPTd0eWPMfA/viewform" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150 ease-in-out underline">
-                Access the Google Form Preference Manager
+            <a href="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150 ease-in-out underline">
+                Access the Full Preference Manager
             </a>
             
             <!-- Form Submission Note -->
