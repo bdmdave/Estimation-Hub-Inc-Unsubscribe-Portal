@@ -20,6 +20,19 @@
         .success-message {
             display: none;
         }
+        /* Styling for the loading spinner */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -37,22 +50,21 @@
         </header>
 
         <!-- Success Message Container -->
-        <div id="success-message" class="success-message p-4 mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg" role="alert">
-            <p class="font-bold">Request Submitted!</p>
-            <p>Thank you. Your request has been sent to David and will be processed shortly.</p>
+        <div id="success-message" class="success-message p-6 mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg transition-opacity duration-500" role="alert">
+            <p class="font-bold text-xl mb-1">Request Submitted Successfully!</p>
+            <p>Thank you. Your email preference request has been instantly logged and sent to David for processing.</p>
         </div>
 
-        <!-- FormSubmit Form (This will be hidden after success) -->
+        <!-- FormSubmit Form -->
         <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
-
-            <!-- FIX for slow redirection: This redirects the user back to your page, making the perceived loading time much shorter. -->
-            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/">
 
             <!-- Hidden field to disable CAPTCHA -->
             <input type="hidden" name="_captcha" value="false">
             
             <!-- Hidden field for email subject -->
             <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
+            
+            <!-- We remove the _next field since we are handling the success locally via JavaScript -->
 
             <!-- Email Input -->
             <div>
@@ -100,12 +112,14 @@
                 ></textarea>
             </div>
 
-            <!-- Submit Button -->
+            <!-- Submit Button with Loading Indicator -->
             <button
                 type="submit"
-                class="btn-primary w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
+                id="submitButton"
+                class="btn-primary w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200 ease-in-out disabled:opacity-50"
             >
-                Submit Request
+                <span id="buttonText">Submit Request</span>
+                <div id="buttonSpinner" class="loader ml-3 hidden"></div>
             </button>
         </form>
         <!-- End of FormSubmit Form -->
@@ -139,6 +153,62 @@
             </p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('preferenceForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const successMessage = document.getElementById('success-message');
+            
+            // 1. Show loading state
+            submitButton.disabled = true;
+            buttonText.textContent = 'Sending...';
+            buttonSpinner.classList.remove('hidden');
+
+            // 2. Prepare form data
+            const formData = new FormData(form);
+
+            // 3. Perform AJAX submission
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    // Note: FormSubmit.co is designed to handle form submissions directly
+                    // It typically sends a 302 redirect after success. 
+                    // By handling it via JS/fetch, we interrupt the navigation.
+                });
+
+                // Check for successful response status (FormSubmit often returns a 302, but fetch might treat it as success)
+                if (response.ok || response.status === 200 || response.status === 302) {
+                    // 4. Success state: Hide form and show success message instantly
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    
+                    // You can optionally reset the form here if you wanted to keep it visible later
+                    // form.reset();
+
+                } else {
+                    // Handle non-successful responses, although rare with FormSubmit.co
+                    alert('Submission failed. Please check your connection and try again.');
+                }
+            } catch (error) {
+                // Handle network errors
+                console.error('Submission Error:', error);
+                alert('An error occurred while submitting the request. Please try again or email us directly.');
+            } finally {
+                // 5. Reset button state (only necessary if we were keeping the form visible)
+                if (form.style.display !== 'none') {
+                    submitButton.disabled = false;
+                    buttonText.textContent = 'Submit Request';
+                    buttonSpinner.classList.add('hidden');
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
