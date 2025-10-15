@@ -5,58 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Email Preferences & Unsubscribe</title>
   <style>
-    body {
-      font-family: Verdana, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .container {
-      background: #fff;
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-align: center;
-      position: relative;
-    }
-    h1 { color: #007BFF; margin-bottom: 5px; }
-    h2 { margin: 0 0 10px 0; font-weight: normal; color: #333; }
-    .role { margin-bottom: 10px; font-style: italic; color: #555; }
-    .engage-line { margin-bottom: 20px; color: #333; }
-    form { display: flex; flex-direction: column; gap: 15px; }
-    input, textarea, button { padding: 12px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px; outline: none; width: 100%; box-sizing: border-box; }
-    button { background: #007BFF; color: #fff; cursor: pointer; transition: background 0.3s ease; }
-    button:hover { background: #0056b3; }
-
-    /* Modern card-style options */
-    .preferences { display: flex; flex-direction: column; gap: 10px; }
-    .option-card { border: 1px solid #ccc; border-radius: 5px; padding: 12px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; }
-    .option-card:hover { background: #e6f0ff; border-color: #007BFF; }
-    .option-card input { margin-right: 10px; }
-
-    /* Thank-you overlay */
-    .success-message {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 1000;
-    }
-    .success-message h1 { margin: 0 0 10px 0; font-size: 36px; }
-    .success-message h2 { margin: 0 0 5px 0; font-size: 28px; font-weight: normal; }
-    .success-message h3 { margin: 0; font-size: 22px; font-weight: normal; }
+    body { font-family: Verdana, sans-serif; background: #f7f7f7; margin:0; padding:0; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+    .container { background:#fff; padding:30px; max-width:600px; width:90%; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.1); text-align:center; }
+    h1 { color:#007BFF; margin-bottom:5px; }
+    h2 { margin:0 0 10px 0; font-weight:normal; color:#333; }
+    .role { margin-bottom:10px; font-style:italic; color:#555; }
+    .engage-line { margin-bottom:20px; color:#333; }
+    form { display:flex; flex-direction:column; gap:15px; }
+    input, textarea, button { padding:12px; font-size:14px; border:1px solid #ccc; border-radius:5px; outline:none; width:100%; box-sizing:border-box; }
+    button { background:#007BFF; color:#fff; cursor:pointer; transition:background 0.3s ease; }
+    button:hover { background:#0056b3; }
+    .preferences { display:flex; flex-direction:column; gap:10px; }
+    .option-card { border:1px solid #ccc; border-radius:5px; padding:12px; cursor:pointer; display:flex; align-items:center; transition:all 0.2s ease; }
+    .option-card:hover { background:#e6f0ff; border-color:#007BFF; }
+    .option-card input { margin-right:10px; }
   </style>
 </head>
 <body>
@@ -66,7 +28,7 @@
     <div class="role">Business Development Manager</div>
     <div class="engage-line">We value your feedback and want to make your experience with us exceptional!</div>
 
-    <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
+    <form action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
       <input type="email" name="email" placeholder="Your Email (required)" required>
       <input type="text" name="name" placeholder="Your Name (optional)">
       <textarea name="message" placeholder="Your Comment (optional)" rows="4"></textarea>
@@ -84,47 +46,9 @@
       </div>
 
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="thankyou.html"> <!-- Redirect after submit -->
       <button type="submit">Submit</button>
     </form>
   </div>
-
-  <div class="success-message" id="successMessage">
-    <h1>Thank You!</h1>
-    <h2>David Alonso</h2>
-    <h3>Estimation Hub Inc.</h3>
-  </div>
-
-  <script>
-    const form = document.getElementById('preferenceForm');
-    const successMessage = document.getElementById('successMessage');
-
-    form.addEventListener('submit', function(e){
-      e.preventDefault(); // prevent default reload
-
-      const formData = new FormData(form);
-
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      }).then(response => {
-        if (response.ok) {
-          // show thank-you overlay instantly
-          successMessage.style.display = 'flex';
-          form.style.display = 'none';
-
-          // hide after 3 seconds and reset form
-          setTimeout(() => {
-            successMessage.style.display = 'none';
-            form.reset();
-            form.style.display = 'flex';
-          }, 3000);
-
-        } else {
-          alert("Oops! Something went wrong. Please try again.");
-        }
-      }).catch(err => alert("Submission failed. Please check your connection."));
-    });
-  </script>
 </body>
 </html>
