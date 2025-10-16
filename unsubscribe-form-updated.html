@@ -37,9 +37,8 @@
 
             <!-- HIDDEN FIELDS FOR FORM SUBMISSION CONTROL -->
             
-            <!-- 1. Custom Redirect after success (MANDATORY for fast redirection) -->
-            <!-- Ensure this path is correct relative to where you host this page -->
-            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thank-you.html">
+            <!-- 1. CRITICAL FIX: Custom Redirect using a relative path -->
+            <input type="hidden" name="_next" value="./thank-you.html">
 
             <!-- 2. Disable CAPTCHA (Keeping this here as requested) -->
             <input type="hidden" name="_captcha" value="false">
@@ -120,7 +119,6 @@
             <p class="text-sm text-gray-500 pt-2">
                 Alternatively, you can visit our main Estimation Hub Inc. Website:
             </p>
-            <!-- UPDATED LINK TEXT AND URL HERE -->
             <a href="https://estimationhubinc.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150 ease-in-out underline break-all">
                 https://estimationhubinc.com/
             </a>
