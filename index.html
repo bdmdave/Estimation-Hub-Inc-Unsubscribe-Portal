@@ -16,6 +16,23 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        /* Hidden success message by default */
+        .success-message {
+            display: none;
+        }
+        /* Styling for the loading spinner */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -32,19 +49,23 @@
             <p class="text-gray-500">We respect your inbox. Choose how you'd like to hear from us below.</p>
         </header>
 
-        <!-- FormSubmit Form - Uses standard POST submission for immediate redirect -->
-        <!-- ACTION CHANGE: Using the direct email format is sometimes more reliable for redirects -->
+        <!-- Success Message Container - HIDDEN BY DEFAULT -->
+        <div id="success-message" class="success-message p-6 mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg transition-opacity duration-500" role="alert">
+            <p class="font-bold text-xl mb-1">Success! Request Submitted.</p>
+            <p>Your request has been instantly prioritized and assigned to David's team. The form is now ready for your next entry.</p>
+        </div>
+
+        <!-- FormSubmit Form -->
         <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
 
             <!-- HIDDEN FIELDS FOR FORM SUBMISSION CONTROL -->
             
-            <!-- 1. CRITICAL FIX: Custom Redirect using the ABSOLUTE URL. -->
-            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thankyou.html">
+            <!-- We removed the _next field to prevent page redirection -->
 
-            <!-- 2. Disable CAPTCHA (Keeping this here as requested) -->
+            <!-- 1. Disable CAPTCHA -->
             <input type="hidden" name="_captcha" value="false">
             
-            <!-- 3. Custom Subject Line -->
+            <!-- 2. Custom Subject Line -->
             <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
             
             <!-- Email Input -->
@@ -93,13 +114,14 @@
                 ></textarea>
             </div>
 
-            <!-- Submit Button (Simple HTML submit - no JavaScript required) -->
+            <!-- Submit Button with Loading Indicator -->
             <button
                 type="submit"
                 id="submitButton"
                 class="btn-primary w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
             >
-                Submit Request
+                <span id="buttonText">Submit Request</span>
+                <div id="buttonSpinner" class="loader ml-3 hidden"></div>
             </button>
         </form>
         <!-- End of FormSubmit Form -->
@@ -129,5 +151,74 @@
             </p>
         </div>
     </div>
+    <script>
+        // JavaScript for AJAX submission and local success banner display
+        document.getElementById('preferenceForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const successMessage = document.getElementById('success-message');
+            
+            // 1. Show loading state
+            submitButton.disabled = true;
+            buttonText.textContent = 'Sending...';
+            buttonSpinner.classList.remove('hidden');
+            // Ensure any previous error color is removed
+            submitButton.classList.remove('bg-red-500', 'hover:bg-red-600');
+            submitButton.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+
+            // 2. Prepare form data
+            const formData = new FormData(form);
+
+            // 3. Perform AJAX submission
+            try {
+                // Submit the form data asynchronously
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                });
+
+                // Check for successful response status (FormSubmit relies on the request completing)
+                if (response.ok || response.status === 200 || response.status === 302) {
+                    // 4. Success state: Show message and reset form
+                    successMessage.style.display = 'block'; // Show success message
+                    form.reset(); // Clear form fields
+                    
+                    // Reset button state
+                    submitButton.disabled = false;
+                    buttonText.textContent = 'Submit Request';
+                    
+                    // Temporarily hide the success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+
+                } else {
+                    // Handle non-successful responses
+                    console.error('Submission failed with status:', response.status);
+                    // Fallback visual error message
+                    buttonText.textContent = 'Submission Failed';
+                    submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                    submitButton.classList.add('bg-red-500', 'hover:bg-red-600');
+                    // Re-enable button
+                    submitButton.disabled = false;
+                }
+            } catch (error) {
+                // Handle network errors (e.g., disconnected internet)
+                console.error('Network Error:', error);
+                buttonText.textContent = 'Network Error';
+                submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                submitButton.classList.add('bg-red-500', 'hover:bg-red-600');
+                // Re-enable button
+                submitButton.disabled = false;
+            } finally {
+                // 5. Hide spinner after attempt
+                buttonSpinner.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
