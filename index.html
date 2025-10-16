@@ -37,8 +37,9 @@
 
             <!-- HIDDEN FIELDS FOR FORM SUBMISSION CONTROL -->
             
-            <!-- 1. CRITICAL FIX: Custom Redirect using the new relative URL -->
-            <input type="hidden" name="_next" value="./thankyou.html">
+            <!-- 1. CRITICAL FIX: Custom Redirect using the ABSOLUTE URL. -->
+            <!-- *** CONFIRM THIS VALUE IN YOUR DEPLOYED FILE IS EXACTLY RIGHT *** -->
+            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thankyou.html">
 
             <!-- 2. Disable CAPTCHA (Keeping this here as requested) -->
             <input type="hidden" name="_captcha" value="false">
@@ -110,7 +111,7 @@
                 This service is provided by **Estimation Hub Inc.**
             </p>
 
-            <p class="text-base text-gray-700">
+            <p class="base text-gray-700">
                 Have any questions or need direct assistance?
                 Please contact **David** directly at
                 <a href="mailto:david@estimationhubinc.com" class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-150 ease-in-out underline">david@estimationhubinc.com</a>.
