@@ -33,12 +33,12 @@
         </header>
 
         <!-- FormSubmit Form - Uses standard POST submission for immediate redirect -->
-        <form id="preferenceForm" action="https://formsubmit.co/el/zokeya" method="POST" class="space-y-6">
+        <!-- ACTION CHANGE: Using the direct email format is sometimes more reliable for redirects -->
+        <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
 
             <!-- HIDDEN FIELDS FOR FORM SUBMISSION CONTROL -->
             
             <!-- 1. CRITICAL FIX: Custom Redirect using the ABSOLUTE URL. -->
-            <!-- *** CONFIRM THIS VALUE IN YOUR DEPLOYED FILE IS EXACTLY RIGHT *** -->
             <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thankyou.html">
 
             <!-- 2. Disable CAPTCHA (Keeping this here as requested) -->
