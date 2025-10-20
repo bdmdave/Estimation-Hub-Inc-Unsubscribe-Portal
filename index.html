@@ -1,47 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Email Preferences & Unsubscribe</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Light gray background */
-        }
-        /* Custom styling for button hover effect */
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        /* Hidden success message by default */
-        .success-message {
-            display: none;
-        }
-        /* Styling for the loading spinner */
-        .loader {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Email Preferences & Unsubscribe</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #ffffff;
+        overflow-x: hidden;
+        position: relative;
+    }
 
-    <div class="w-full max-w-lg bg-white rounded-xl shadow-2xl p-8 sm:p-10 border-t-8 border-indigo-600">
+    /* Floating Gradient Blobs */
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.6;
+        animation: float 15s infinite alternate ease-in-out;
+        z-index: -1;
+    }
+
+    .blob1 {
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(135deg, #00fff7, #3b00ff);
+        top: -100px;
+        left: -100px;
+    }
+
+    .blob2 {
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, #3b00ff, #00fff7);
+        bottom: -80px;
+        right: -80px;
+        animation-duration: 18s;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px) translateX(0px); }
+        50% { transform: translateY(-30px) translateX(20px); }
+        100% { transform: translateY(0px) translateX(0px); }
+    }
+
+    /* Glassmorphism Form Container */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        border-top: 4px solid transparent;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Button Styling with soft glow */
+    .btn-primary {
+        background: linear-gradient(90deg, #00fff7, #3b00ff);
+        color: #fff;
+        font-weight: 600;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5); }
+        50% { box-shadow: 0 10px 25px rgba(0, 191, 255, 0.6); }
+        100% { box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5); }
+    }
+
+    /* Form inputs */
+    input, textarea {
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.3);
+        background: rgba(255,255,255,0.25);
+        padding: 12px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #00fff7;
+        background: rgba(255,255,255,0.35);
+        outline: none;
+        box-shadow: 0 0 10px rgba(0, 255, 247, 0.3);
+    }
+
+    /* Radio card hover effect */
+    .radio-card:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: #00fff7;
+    }
+
+    /* Success message */
+    .success-message {
+        display: none;
+        background: rgba(0, 255, 247, 0.1);
+        border-left: 4px solid #00fff7;
+        color: #00bfff;
+        border-radius: 12px;
+        padding: 1rem;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 relative">
+
+    <!-- Floating Blobs -->
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+
+    <div class="w-full max-w-lg glass-card p-8 sm:p-10 border-t-8 border-indigo-600">
         
         <header class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
-                Manage Your <span class="text-indigo-600">Email Status</span>
+                Manage Your <span class="text-cyan-500">Email Status</span>
             </h1>
             <p class="text-lg font-semibold text-gray-700 mb-4">
                 from Estimation Hub Inc.
@@ -49,8 +133,8 @@
             <p class="text-gray-500">We respect your inbox. Choose how you'd like to hear from us below.</p>
         </header>
 
-        <!-- Success Message Container - HIDDEN BY DEFAULT -->
-        <div id="success-message" class="success-message p-6 mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg transition-opacity duration-500" role="alert">
+        <!-- Success Message Container -->
+        <div id="success-message" class="success-message mb-6" role="alert">
             <p class="font-bold text-xl mb-1">Success! Request Submitted.</p>
             <p>Your request has been instantly prioritized and assigned to David's team. The form is now ready for your next entry.</p>
         </div>
@@ -58,45 +142,29 @@
         <!-- FormSubmit Form -->
         <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
 
-            <!-- HIDDEN FIELDS FOR FORM SUBMISSION CONTROL -->
-            
-            <!-- We removed the _next field to prevent page redirection -->
-
-            <!-- 1. Disable CAPTCHA -->
             <input type="hidden" name="_captcha" value="false">
-            
-            <!-- 2. Custom Subject Line -->
             <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
-            
+
             <!-- Email Input -->
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email Address</label>
-                <input
-                    type="email"
-                    name="Email"
-                    id="email"
-                    required
-                    placeholder="Enter the email to manage"
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
-                >
+                <label for="email" class="block text-sm font-medium text-gray-900 mb-1">Your Email Address</label>
+                <input type="email" name="Email" id="email" required placeholder="Enter the email to manage" class="mt-1 block w-full">
             </div>
 
             <!-- Preference Options -->
             <div class="space-y-4 pt-2">
-                <label class="block text-sm font-medium text-gray-700">Select Your Request Type</label>
+                <label class="block text-sm font-medium text-gray-900">Select Your Request Type</label>
 
-                <!-- Unsubscribe Option -->
-                <div class="flex items-center p-3 border border-gray-200 rounded-lg transition duration-150 ease-in-out hover:bg-red-50">
-                    <input id="unsubscribe" name="Request Type" type="radio" value="Unsubscribe from All" required class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300">
-                    <label for="unsubscribe" class="ml-3 block text-base font-medium text-gray-700">
+                <div class="flex items-center p-3 border border-white/30 rounded-lg transition duration-150 ease-in-out radio-card">
+                    <input id="unsubscribe" name="Request Type" type="radio" value="Unsubscribe from All" required class="focus:ring-red-400 h-4 w-4 text-red-500 border-gray-300">
+                    <label for="unsubscribe" class="ml-3 block text-base font-medium text-gray-900">
                         Unsubscribe from All Future Emails
                     </label>
                 </div>
 
-                <!-- Manage Preferences Option -->
-                <div class="flex items-center p-3 border border-gray-200 rounded-lg transition duration-150 ease-in-out hover:bg-indigo-50">
-                    <input id="manage-preferences" name="Request Type" type="radio" value="Manage Preferences/Reduce Frequency" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                    <label for="manage-preferences" class="ml-3 block text-base font-medium text-gray-700">
+                <div class="flex items-center p-3 border border-white/30 rounded-lg transition duration-150 ease-in-out radio-card">
+                    <input id="manage-preferences" name="Request Type" type="radio" value="Manage Preferences/Reduce Frequency" class="focus:ring-cyan-400 h-4 w-4 text-cyan-500 border-gray-300">
+                    <label for="manage-preferences" class="ml-3 block text-base font-medium text-gray-900">
                         Manage Preferences (e.g., reduce frequency)
                     </label>
                 </div>
@@ -104,140 +172,77 @@
 
             <!-- Feedback / Optional Message -->
             <div>
-                <label for="feedback" class="block text-sm font-medium text-gray-700 mb-1">Optional Feedback / Message</label>
-                <textarea
-                    id="feedback"
-                    name="Feedback"
-                    rows="3"
-                    placeholder="Let us know why, or specify your preferred frequency."
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
-                ></textarea>
+                <label for="feedback" class="block text-sm font-medium text-gray-900 mb-1">Optional Feedback / Message</label>
+                <textarea id="feedback" name="Feedback" rows="3" placeholder="Let us know why, or specify your preferred frequency." class="mt-1 block w-full"></textarea>
             </div>
 
-            <!-- Submit Button with Loading Indicator -->
-            <button
-                type="submit"
-                id="submitButton"
-                class="btn-primary w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-200 ease-in-out"
-            >
+            <!-- Submit Button -->
+            <button type="submit" id="submitButton" class="btn-primary w-full flex justify-center items-center py-3 px-4 text-base">
                 <span id="buttonText">Submit Request</span>
                 <div id="buttonSpinner" class="loader ml-3 hidden"></div>
             </button>
         </form>
-        <!-- End of FormSubmit Form -->
 
         <!-- Footer -->
         <div class="mt-8 pt-6 border-t border-gray-100 text-center space-y-3">
-            
             <p class="text-sm font-medium text-gray-600">
-                This service is provided by **Estimation Hub Inc.**
+                This service is provided by <strong>Estimation Hub Inc.</strong>
             </p>
 
-            <p class="base text-gray-700">
-                Have any questions or need direct assistance?
-                Please contact **David** directly at
-                <a href="mailto:david@estimationhubinc.com" class="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-150 ease-in-out underline">david@estimationhubinc.com</a>.
+            <p class="text-gray-700">
+                Have any questions or need direct assistance? Contact <strong>David</strong> at
+                <a href="mailto:david@estimationhubinc.com" class="text-cyan-500 hover:text-indigo-600 font-semibold underline">david@estimationhubinc.com</a>.
             </p>
 
             <p class="text-sm text-gray-500 pt-2">
-                Alternatively, you can visit our main Estimation Hub Inc. Website:
+                Alternatively, visit our main website:
             </p>
-            <a href="https://estimationhubinc.com/" target="_blank" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-150 ease-in-out underline break-all">
+            <a href="https://estimationhubinc.com/" target="_blank" class="text-cyan-500 hover:text-indigo-600 text-sm font-medium underline break-all">
                 https://estimationhubinc.com/
             </a>
-            
+
             <p class="text-xs text-gray-400 mt-4">
                 Requests are securely sent via FormSubmit.co.
             </p>
         </div>
     </div>
-    <script>
-        // JavaScript for AJAX submission and local success banner display
-        document.getElementById('preferenceForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
 
-            const form = e.target;
-            const submitButton = document.getElementById('submitButton');
-            const buttonText = document.getElementById('buttonText');
-            const buttonSpinner = document.getElementById('buttonSpinner');
-            const successMessage = document.getElementById('success-message');
-            
-            // 1. Show loading state
-            submitButton.disabled = true;
-            buttonText.textContent = 'Sending...';
-            buttonSpinner.classList.remove('hidden');
-            // Ensure any previous error color is removed
-            submitButton.classList.remove('bg-red-500', 'hover:bg-red-600');
-            submitButton.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
-
-            // 2. Prepare form data
-            const formData = new FormData(form);
-
-            // 3. Perform AJAX submission
-            try {
-                // Submit the form data asynchronously
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                });
-
-                // Check for successful response status (FormSubmit relies on the request completing)
-                if (response.ok || response.status === 200 || response.status === 302) {
-                    // 4. Success state: Show message and reset form
-                    successMessage.style.display = 'block'; // Show success message
-                    form.reset(); // Clear form fields
-                    
-                    // Reset button state
-                    submitButton.disabled = false;
-                    buttonText.textContent = 'Submit Request';
-                    
-                    // Temporarily hide the success message after 5 seconds
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 5000);
-
-                } else {
-                    // Handle non-successful responses
-                    console.error('Submission failed with status:', response.status);
-                    // Fallback visual error message
-                    buttonText.textContent = 'Submission Failed';
-                    submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-                    submitButton.classList.add('bg-red-500', 'hover:bg-red-600');
-                    // Re-enable button
-                    submitButton.disabled = false;
-                }
-            } catch (error) {
-                // Handle network errors (e.g., disconnected internet)
-                console.error('Network Error:', error);
-                buttonText.textContent = 'Network Error';
-                submitButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-                submitButton.classList.add('bg-red-500', 'hover:bg-red-600');
-                // Re-enable button
-                submitButton.disabled = false;
-            } finally {
-                // 5. Hide spinner after attempt
-                buttonSpinner.classList.add('hidden');
-            }
-        });
-    </script>
-    <!-- Quick Laugh Widget -->
-<div id="laugh-widget"
-     style="position:fixed;
-            bottom:15px;
-            right:15px;
-            background:#007BFF;
-            color:#fff;
-            padding:10px 18px;
-            border-radius:8px;
-            font-family:Verdana, sans-serif;
-            font-size:14px;
-            cursor:pointer;
-            box-shadow:0 3px 6px rgba(0,0,0,0.2);
-            z-index:9999;">
-  😂 Quick Laugh
-</div>
+    <!-- Floating Joke Widget -->
+    <div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#00fff7,#3b00ff);color:#fff;padding:10px 18px;border-radius:12px;font-family:Verdana,sans-serif;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);z-index:9999;">
+      😂 Quick Laugh
+    </div>
 
 <script>
+document.getElementById('preferenceForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const submitButton = document.getElementById('submitButton');
+    const buttonText = document.getElementById('buttonText');
+    const buttonSpinner = document.getElementById('buttonSpinner');
+    const successMessage = document.getElementById('success-message');
+    submitButton.disabled = true;
+    buttonText.textContent = 'Sending...';
+    buttonSpinner.classList.remove('hidden');
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(form.action, { method: form.method, body: formData });
+        if (response.ok || response.status === 200 || response.status === 302) {
+            successMessage.style.display = 'block';
+            form.reset();
+            submitButton.disabled = false;
+            buttonText.textContent = 'Submit Request';
+            setTimeout(()=>{ successMessage.style.display='none'; },5000);
+        } else {
+            buttonText.textContent = 'Submission Failed';
+            submitButton.disabled = false;
+        }
+    } catch (err) {
+        buttonText.textContent = 'Network Error';
+        submitButton.disabled = false;
+    } finally { buttonSpinner.classList.add('hidden'); }
+});
+
+// Joke Widget
 const JOKE_URL = "https://raw.githubusercontent.com/bdmdave/David-s-Laugh-Hub/main/jokes.json";
 document.getElementById("laugh-widget").addEventListener("click", async () => {
   try {
@@ -246,12 +251,9 @@ document.getElementById("laugh-widget").addEventListener("click", async () => {
     const visible = jokes.filter(j => j.visible !== false);
     const random = visible[Math.floor(Math.random() * visible.length)];
     alert(random.text || "No jokes available right now 😅");
-  } catch (err) {
-    alert("Couldn’t fetch a joke — check your connection!");
-  }
+  } catch { alert("Couldn’t fetch a joke — check your connection!"); }
 });
 </script>
 
 </body>
 </html>
-
