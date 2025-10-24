@@ -3,243 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Email Preferences & Unsubscribe</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Manage Email Preferences | Estimation Hub Inc</title>
 <style>
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #ffffff;
-        overflow-x: hidden;
-        position: relative;
-    }
+/* Base & Font */
+body {
+    font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7e6f2;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    /* Floating Gradient Blobs */
-    .blob {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(120px);
-        opacity: 0.6;
-        animation: float 15s infinite alternate ease-in-out;
-        z-index: -1;
-    }
+/* Floating Gradient Blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    animation: float 15s infinite alternate ease-in-out;
+    z-index: -1;
+}
+.blob1 { width:400px; height:400px; background:linear-gradient(135deg,#00fff7,#3b00ff); top:-100px; left:-100px; }
+.blob2 { width:300px; height:300px; background:linear-gradient(135deg,#3b00ff,#00fff7); bottom:-80px; right:-80px; animation-duration:18s; }
+@keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-30px) translateX(20px);} 100%{transform:translateY(0) translateX(0);} }
 
-    .blob1 {
-        width: 400px;
-        height: 400px;
-        background: linear-gradient(135deg, #00fff7, #3b00ff);
-        top: -100px;
-        left: -100px;
-    }
+/* Glass Card */
+.glass-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    border-top: 8px solid #3b00ff;
+    transition: all 0.3s ease-in-out;
+}
 
-    .blob2 {
-        width: 300px;
-        height: 300px;
-        background: linear-gradient(135deg, #3b00ff, #00fff7);
-        bottom: -80px;
-        right: -80px;
-        animation-duration: 18s;
-    }
+/* Headers */
+h1, h2 { font-weight: bold; text-align: center; }
+h1 span { color: #00fff7; }
 
-    @keyframes float {
-        0% { transform: translateY(0px) translateX(0px); }
-        50% { transform: translateY(-30px) translateX(20px); }
-        100% { transform: translateY(0px) translateX(0px); }
-    }
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(90deg, #00fff7, #3b00ff);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,191,255,0.6);
+    animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+    0%{box-shadow:0 6px 20px rgba(0,191,255,0.5);}
+    50%{box-shadow:0 10px 25px rgba(0,191,255,0.6);}
+    100%{box-shadow:0 6px 20px rgba(0,191,255,0.5);}
+}
 
-    /* Glassmorphism Form Container */
-    .glass-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-        border-top: 4px solid transparent;
-        transition: all 0.3s ease-in-out;
-    }
+/* Inputs & Textarea */
+input, textarea {
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
+    padding: 10px;
+    width: 100%;
+    margin-top: 4px;
+    transition: all 0.25s ease-in-out;
+}
+input:focus, textarea:focus {
+    border-color: #00fff7;
+    background: rgba(255,255,255,0.35);
+    outline: none;
+    box-shadow: 0 0 15px rgba(0,255,247,0.4);
+    transform: scale(1.02);
+}
 
-    /* Button Styling with soft glow */
-    .btn-primary {
-        background: linear-gradient(90deg, #00fff7, #3b00ff);
-        color: #fff;
-        font-weight: 600;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
-        transition: all 0.3s ease-in-out;
-    }
+/* Radio Cards */
+.radio-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    margin-top: 5px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.radio-card:hover, .radio-card input:focus + label {
+    background: rgba(255,255,255,0.25);
+    border-color: #00fff7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,191,255,0.3);
+}
 
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
-        animation: pulse 1.5s infinite;
-    }
+/* Success message */
+.success-message {
+    display: none;
+    background: rgba(255,255,255,0.15);
+    border-left: 4px solid #00fff7;
+    color: #00bfff;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+.success-message.show { opacity:1; animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { 0%{opacity:0;transform:translateY(-10px);} 100%{opacity:1;transform:translateY(0);} }
 
-    @keyframes pulse {
-        0% { box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5); }
-        50% { box-shadow: 0 10px 25px rgba(0, 191, 255, 0.6); }
-        100% { box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5); }
-    }
-
-    /* Form inputs */
-    input, textarea {
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.3);
-        background: rgba(255,255,255,0.25);
-        padding: 12px;
-        transition: all 0.3s ease-in-out;
-    }
-
-    input:focus, textarea:focus {
-        border-color: #00fff7;
-        background: rgba(255,255,255,0.35);
-        outline: none;
-        box-shadow: 0 0 10px rgba(0, 255, 247, 0.3);
-    }
-
-    /* Radio card hover effect */
-    .radio-card:hover {
-        background: rgba(255,255,255,0.2);
-        border-color: #00fff7;
-    }
-
-    /* Success message */
-    .success-message {
-        display: none;
-        background: rgba(0, 255, 247, 0.1);
-        border-left: 4px solid #00fff7;
-        color: #00bfff;
-        border-radius: 12px;
-        padding: 1rem;
-        transition: opacity 0.5s ease-in-out;
-    }
+/* Footer Links */
+a { text-decoration: underline; color: #00fff7; }
 
 </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 relative">
+<body class="soft-bg">
 
-    <!-- Floating Blobs -->
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
+<!-- Blobs -->
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
-    <div class="w-full max-w-lg glass-card p-8 sm:p-10 border-t-8 border-indigo-600">
-        
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
-                Manage Your <span class="text-cyan-500">Email Status</span>
-            </h1>
-            <p class="text-lg font-semibold text-gray-700 mb-4">
-                from Estimation Hub Inc.
-            </p>
-            <p class="text-gray-500">We respect your inbox. Choose how you'd like to hear from us below.</p>
-        </header>
+<div class="glass-card">
+    <header class="mb-6">
+        <h1>Manage Your <span>Email Status</span></h1>
+        <p style="text-align:center; color:#6e6170; margin-top:5px;">from Estimation Hub Inc.</p>
+    </header>
 
-        <!-- Success Message Container -->
-        <div id="success-message" class="success-message mb-6" role="alert">
-            <p class="font-bold text-xl mb-1">Success! Request Submitted.</p>
-            <p>Your request has been instantly prioritized and assigned to David's team. The form is now ready for your next entry.</p>
-        </div>
-
-        <!-- FormSubmit Form -->
-        <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
-
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
-
-            <!-- Email Input -->
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-900 mb-1">Your Email Address</label>
-                <input type="email" name="Email" id="email" required placeholder="Enter the email to manage" class="mt-1 block w-full">
-            </div>
-
-            <!-- Preference Options -->
-            <div class="space-y-4 pt-2">
-                <label class="block text-sm font-medium text-gray-900">Select Your Request Type</label>
-
-                <div class="flex items-center p-3 border border-white/30 rounded-lg transition duration-150 ease-in-out radio-card">
-                    <input id="unsubscribe" name="Request Type" type="radio" value="Unsubscribe from All" required class="focus:ring-red-400 h-4 w-4 text-red-500 border-gray-300">
-                    <label for="unsubscribe" class="ml-3 block text-base font-medium text-gray-900">
-                        Unsubscribe from All Future Emails
-                    </label>
-                </div>
-
-                <div class="flex items-center p-3 border border-white/30 rounded-lg transition duration-150 ease-in-out radio-card">
-                    <input id="manage-preferences" name="Request Type" type="radio" value="Manage Preferences/Reduce Frequency" class="focus:ring-cyan-400 h-4 w-4 text-cyan-500 border-gray-300">
-                    <label for="manage-preferences" class="ml-3 block text-base font-medium text-gray-900">
-                        Manage Preferences (e.g., reduce frequency)
-                    </label>
-                </div>
-            </div>
-
-            <!-- Feedback / Optional Message -->
-            <div>
-                <label for="feedback" class="block text-sm font-medium text-gray-900 mb-1">Optional Feedback / Message</label>
-                <textarea id="feedback" name="Feedback" rows="3" placeholder="Let us know why, or specify your preferred frequency." class="mt-1 block w-full"></textarea>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" id="submitButton" class="btn-primary w-full flex justify-center items-center py-3 px-4 text-base">
-                <span id="buttonText">Submit Request</span>
-                <div id="buttonSpinner" class="loader ml-3 hidden"></div>
-            </button>
-        </form>
-
-        <!-- Footer -->
-        <div class="mt-8 pt-6 border-t border-gray-100 text-center space-y-3">
-            <p class="text-sm font-medium text-gray-600">
-                This service is provided by <strong>Estimation Hub Inc.</strong>
-            </p>
-
-            <p class="text-gray-700">
-                Have any questions or need direct assistance? Contact <strong>David</strong> at
-                <a href="mailto:david@estimationhubinc.com" class="text-cyan-500 hover:text-indigo-600 font-semibold underline">david@estimationhubinc.com</a>.
-            </p>
-
-            <p class="text-sm text-gray-500 pt-2">
-                Alternatively, visit our main website:
-            </p>
-            <a href="https://estimationhubinc.com/" target="_blank" class="text-cyan-500 hover:text-indigo-600 text-sm font-medium underline break-all">
-                https://estimationhubinc.com/
-            </a>
-
-            <p class="text-xs text-gray-400 mt-4">
-                Requests are securely sent via FormSubmit.co.
-            </p>
-        </div>
+    <!-- Success Message -->
+    <div id="success-message" class="success-message" role="alert">
+        <p><strong>Success!</strong> Request Submitted.</p>
+        <p>Your request has been prioritized and assigned to David's team.</p>
     </div>
 
-    <!-- Floating Joke Widget -->
-    <div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#00fff7,#3b00ff);color:#fff;padding:10px 18px;border-radius:12px;font-family:Verdana,sans-serif;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);z-index:9999;">
-      😂 Quick Laugh
+    <!-- Form -->
+    <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
+
+        <label for="email">Your Email Address</label>
+        <input type="email" name="Email" id="email" placeholder="Enter your email" required>
+
+        <label style="margin-top:10px;">Select Request Type</label>
+        <div class="radio-card">
+            <input type="radio" name="Request Type" value="Unsubscribe from All" id="unsubscribe" required>
+            <label for="unsubscribe" style="margin-left:8px;">Unsubscribe from All Future Emails</label>
+        </div>
+        <div class="radio-card">
+            <input type="radio" name="Request Type" value="Manage Preferences/Reduce Frequency" id="manage-preferences">
+            <label for="manage-preferences" style="margin-left:8px;">Manage Preferences (reduce frequency)</label>
+        </div>
+
+        <label for="feedback" style="margin-top:10px;">Optional Feedback / Message</label>
+        <textarea name="Feedback" id="feedback" rows="3" placeholder="Optional message or preferences"></textarea>
+
+        <button type="submit" class="btn-primary" style="margin-top:12px;">Submit Request</button>
+    </form>
+
+    <!-- Footer -->
+    <div style="margin-top:20px; text-align:center; font-size:0.9rem; color:#6e6170;">
+        <p>Provided by <strong>Estimation Hub Inc.</strong></p>
+        <p>Contact <strong>David</strong> at <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a></p>
+        <p>Visit our website: <a href="https://estimationhubinc.com/" target="_blank">https://estimationhubinc.com/</a></p>
     </div>
+</div>
+
+<!-- Joke Widget -->
+<div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#00fff7,#3b00ff);color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);">
+    😂 Quick Laugh
+</div>
 
 <script>
-document.getElementById('preferenceForm').addEventListener('submit', async function(e) {
+// Form Submission
+document.getElementById('preferenceForm').addEventListener('submit', async function(e){
     e.preventDefault();
     const form = e.target;
-    const submitButton = document.getElementById('submitButton');
-    const buttonText = document.getElementById('buttonText');
-    const buttonSpinner = document.getElementById('buttonSpinner');
+    const submitBtn = form.querySelector('.btn-primary');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
     const successMessage = document.getElementById('success-message');
-    submitButton.disabled = true;
-    buttonText.textContent = 'Sending...';
-    buttonSpinner.classList.remove('hidden');
     const formData = new FormData(form);
+
     try {
         const response = await fetch(form.action, { method: form.method, body: formData });
         if (response.ok || response.status === 200 || response.status === 302) {
-            successMessage.style.display = 'block';
+            successMessage.classList.add('show');
             form.reset();
-            submitButton.disabled = false;
-            buttonText.textContent = 'Submit Request';
-            setTimeout(()=>{ successMessage.style.display='none'; },5000);
+            setTimeout(()=>{ successMessage.classList.remove('show'); },5000);
         } else {
-            buttonText.textContent = 'Submission Failed';
-            submitButton.disabled = false;
+            alert('Submission failed. Try again.');
         }
-    } catch (err) {
-        buttonText.textContent = 'Network Error';
-        submitButton.disabled = false;
-    } finally { buttonSpinner.classList.add('hidden'); }
+    } catch {
+        alert('Network error. Please try again.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
 });
 
 // Joke Widget
@@ -250,8 +222,8 @@ document.getElementById("laugh-widget").addEventListener("click", async () => {
     const jokes = await res.json();
     const visible = jokes.filter(j => j.visible !== false);
     const random = visible[Math.floor(Math.random() * visible.length)];
-    alert(random.text || "No jokes available right now 😅");
-  } catch { alert("Couldn’t fetch a joke — check your connection!"); }
+    alert(random.text || "No jokes available 😅");
+  } catch { alert("Could not fetch a joke."); }
 });
 </script>
 
