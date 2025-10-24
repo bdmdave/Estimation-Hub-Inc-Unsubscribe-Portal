@@ -7,138 +7,138 @@
 <style>
 body {
     font-family: Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #f7e6f2;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-    position: relative;
+    margin:0;
+    padding:0;
+    background:#f7e6f2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
 }
 
-/* Floating gradient blobs */
+/* Floating blobs */
 .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.6;
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:0.6;
     animation: float 15s infinite alternate ease-in-out;
-    z-index: -1;
+    z-index:-1;
 }
-.blob1 { width:400px; height:400px; background:linear-gradient(135deg,#f7c4ff,#b892ff); top:-100px; left:-100px; }
-.blob2 { width:300px; height:300px; background:linear-gradient(135deg,#b892ff,#f7c4ff); bottom:-80px; right:-80px; animation-duration:18s; }
-@keyframes float {0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-30px) translateX(20px);}100%{transform:translateY(0) translateX(0);}}
+.blob1 { width:300px;height:300px;background:linear-gradient(135deg,#f7c4ff,#b892ff);top:-50px;left:-50px; }
+.blob2 { width:250px;height:250px;background:linear-gradient(135deg,#b892ff,#f7c4ff);bottom:-40px;right:-40px;animation-duration:18s; }
+@keyframes float {0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-20px) translateX(15px);}100%{transform:translateY(0) translateX(0);}}
 
-/* Glass card container */
+/* Glass card container - COMPACT */
 .glass-card {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    padding: 2rem;
+    padding: 1.8rem 2rem;
     width: 100%;
-    max-width: 600px;
-    border-top: 8px solid #b892ff;
+    max-width: 400px; /* smaller, compact width */
+    border-top: 6px solid #b892ff;
     transition: all 0.3s ease-in-out;
 }
 
 /* Headings */
-h1 { font-weight: bold; text-align: center; font-size: 1.9rem; }
-h1 span { color: #b892ff; }
-p.subtitle { text-align:center; color:#6e6170; margin-top:5px; font-size:1rem; }
+h1 { font-weight:bold; text-align:center; font-size:1.7rem; margin-bottom:4px; }
+h1 span { color:#b892ff; }
+p.subtitle { text-align:center; color:#6e6170; font-size:0.95rem; margin-bottom:1rem; }
 
 /* Input and textarea */
 input, textarea {
     width: 100%;
-    padding: 10px;
+    padding: 8px 10px;
     margin-top: 4px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.25);
-    transition: all 0.3s;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.3);
+    background:rgba(255,255,255,0.25);
+    transition: all 0.25s;
+    font-size:0.9rem;
 }
 input:focus, textarea:focus {
-    outline: none;
-    border-color: #b892ff;
-    background: rgba(255,255,255,0.35);
-    box-shadow: 0 0 15px rgba(184,146,255,0.4);
+    outline:none;
+    border-color:#b892ff;
+    background:rgba(255,255,255,0.35);
+    box-shadow:0 0 10px rgba(184,146,255,0.4);
 }
 
 /* Radio cards */
 .radio-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    margin-top: 12px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.1);
-    box-shadow: 0 4px 15px rgba(184,146,255,0.15);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 14px;
+    margin-top:10px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 3px 12px rgba(184,146,255,0.15);
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
+    cursor:pointer;
+    font-size:0.95rem;
 }
 .radio-card:hover {
-    background: rgba(255,255,255,0.2);
-    border-color: #b892ff;
-    box-shadow: 0 6px 20px rgba(184,146,255,0.35);
+    background:rgba(255,255,255,0.2);
+    border-color:#b892ff;
+    box-shadow:0 6px 18px rgba(184,146,255,0.3);
 }
-.radio-card label { flex:1; margin-right:10px; color:#2b2030; font-size:1rem; }
+.radio-card label { flex:1; margin-right:8px; color:#2b2030; font-size:0.95rem; }
 .radio-card input { margin-left:0; cursor:pointer; }
 
 /* Submit button */
 .submit-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:15px;
 }
 .btn-primary {
-    padding: 12px 28px;
-    border: none;
-    border-radius: 16px;
-    background: linear-gradient(90deg,#f7c4ff,#b892ff);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(184,146,255,0.3);
+    padding:10px 22px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#f7c4ff,#b892ff);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(184,146,255,0.3);
     transition: all 0.3s ease-in-out;
+    font-size:0.95rem;
 }
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(184,146,255,0.5);
+    transform:translateY(-1px);
+    box-shadow:0 8px 22px rgba(184,146,255,0.5);
     animation: pulse 1.2s infinite;
 }
 @keyframes pulse {
-    0% { box-shadow: 0 10px 30px rgba(184,146,255,0.5); }
-    50% { box-shadow: 0 14px 40px rgba(184,146,255,0.6); }
-    100% { box-shadow: 0 10px 30px rgba(184,146,255,0.5); }
+    0% { box-shadow:0 8px 22px rgba(184,146,255,0.5); }
+    50% { box-shadow:0 10px 28px rgba(184,146,255,0.6); }
+    100% { box-shadow:0 8px 22px rgba(184,146,255,0.5); }
 }
 
 /* Success message */
 .success-message {
-    display: none;
-    background: rgba(255,255,255,0.15);
-    border-left: 4px solid #b892ff;
-    color: #b892ff;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    opacity: 0;
+    display:none;
+    background:rgba(255,255,255,0.15);
+    border-left:4px solid #b892ff;
+    color:#b892ff;
+    border-radius:10px;
+    padding:0.8rem;
+    margin-bottom:0.8rem;
+    opacity:0;
     transition: all 0.5s;
 }
 .success-message.show { opacity:1; }
 
-/* Footer links */
-a { text-decoration: underline; color: #b892ff; }
-
 /* Mobile adjustments */
-@media (max-width:480px){
-    .glass-card { padding:1rem; }
-    .blob1, .blob2 { width:200px;height:200px; }
-    .submit-wrapper { justify-content: center; }
+@media(max-width:480px){
+    .glass-card { padding:1.2rem; max-width:95%; }
+    .blob1, .blob2 { width:180px;height:180px; }
+    .submit-wrapper { justify-content:center; }
 }
 </style>
 </head>
@@ -180,17 +180,11 @@ a { text-decoration: underline; color: #b892ff; }
             <button type="submit" class="btn-primary">Submit Request</button>
         </div>
     </form>
-
-    <div style="margin-top:20px; text-align:center; font-size:0.9rem; color:#6e6170;">
-        <p>Provided by <strong>Estimation Hub Inc.</strong></p>
-        <p>Contact <strong>David</strong> at <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a></p>
-        <p>Visit our website: <a href="https://estimationhubinc.com/" target="_blank">https://estimationhubinc.com/</a></p>
-    </div>
 </div>
 
 <!-- Joke Widget -->
-<div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#f7c4ff,#b892ff);color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);">
-    😂 Quick Laugh
+<div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#f7c4ff,#b892ff);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);">
+😂 Quick Laugh
 </div>
 
 <script>
@@ -200,11 +194,33 @@ document.getElementById('preferenceForm').addEventListener('submit', async funct
     const form = e.target;
     const submitBtn = form.querySelector('.btn-primary');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-
-    const successMessage = document.getElementById('success-message');
-    const formData = new FormData(form);
-
+    submitBtn.textContent='Sending...';
+    submitBtn.disabled=true;
+    const successMessage=document.getElementById('success-message');
+    const formData=new FormData(form);
     try {
-        const response = await fetch(form
+        const response = await fetch(form.action,{method:form.method,body:formData});
+        if(response.ok || response.status===200 || response.status===302){
+            successMessage.classList.add('show');
+            form.reset();
+            setTimeout(()=>{ successMessage.classList.remove('show'); },4000);
+        } else submitBtn.textContent='Submission Failed';
+    } catch { submitBtn.textContent='Network Error'; }
+    finally { submitBtn.disabled=false; submitBtn.textContent=originalText; }
+});
+
+// Joke widget
+const JOKE_URL="https://raw.githubusercontent.com/bdmdave/David-s-Laugh-Hub/main/jokes.json";
+document.getElementById("laugh-widget").addEventListener("click", async ()=>{
+    try{
+        const res=await fetch(JOKE_URL);
+        const jokes=await res.json();
+        const visible=jokes.filter(j=>j.visible!==false);
+        const random=visible[Math.floor(Math.random()*visible.length)];
+        alert(random.text||"No jokes available 😅");
+    } catch{ alert("Could not fetch a joke."); }
+});
+</script>
+
+</body>
+</html>
