@@ -14,11 +14,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     overflow-x: hidden;
+    position: relative;
 }
 
-/* Floating blobs */
+/* Floating gradient blobs */
 .blob {
     position: absolute;
     border-radius: 50%;
@@ -31,7 +31,7 @@ body {
 .blob2 { width:300px; height:300px; background:linear-gradient(135deg,#b892ff,#f7c4ff); bottom:-80px; right:-80px; animation-duration:18s; }
 @keyframes float {0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-30px) translateX(20px);}100%{transform:translateY(0) translateX(0);}}
 
-/* Glass card */
+/* Glass card container */
 .glass-card {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(20px);
@@ -45,12 +45,12 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-/* Headers */
-h1 { font-weight: bold; text-align: center; }
+/* Headings */
+h1 { font-weight: bold; text-align: center; font-size: 1.9rem; }
 h1 span { color: #b892ff; }
-p.subtitle { text-align:center; color:#6e6170; margin-top:5px; }
+p.subtitle { text-align:center; color:#6e6170; margin-top:5px; font-size:1rem; }
 
-/* Inputs and textarea */
+/* Input and textarea */
 input, textarea {
     width: 100%;
     padding: 10px;
@@ -67,59 +67,54 @@ input:focus, textarea:focus {
     box-shadow: 0 0 15px rgba(184,146,255,0.4);
 }
 
-/* Radio cards: label left, circle right */
+/* Radio cards */
 .radio-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.15);
+    padding: 12px 16px;
+    margin-top: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 4px 15px rgba(184,146,255,0.15);
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
-    transition: all 0.3s;
 }
 .radio-card:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.2);
     border-color: #b892ff;
-    box-shadow: 0 4px 15px rgba(184,146,255,0.4);
+    box-shadow: 0 6px 20px rgba(184,146,255,0.35);
 }
-.radio-card label {
-    cursor: pointer;
-    flex: 1;
-    color: #2b2030;
-}
-.radio-card input {
-    margin-left: 10px;
-}
+.radio-card label { flex:1; margin-right:10px; color:#2b2030; font-size:1rem; }
+.radio-card input { margin-left:0; cursor:pointer; }
 
-/* Submit button right-aligned with hover glow */
+/* Submit button */
 .submit-wrapper {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
 }
 .btn-primary {
-    padding: 12px 24px;
+    padding: 12px 28px;
     border: none;
-    border-radius: 12px;
+    border-radius: 16px;
     background: linear-gradient(90deg,#f7c4ff,#b892ff);
     color: #fff;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(184,146,255,0.3);
+    box-shadow: 0 6px 20px rgba(184,146,255,0.3);
     transition: all 0.3s ease-in-out;
 }
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(184,146,255,0.6);
+    box-shadow: 0 10px 30px rgba(184,146,255,0.5);
     animation: pulse 1.2s infinite;
 }
 @keyframes pulse {
-    0% { box-shadow: 0 8px 25px rgba(184,146,255,0.6); }
-    50% { box-shadow: 0 12px 35px rgba(184,146,255,0.7); }
-    100% { box-shadow: 0 8px 25px rgba(184,146,255,0.6); }
+    0% { box-shadow: 0 10px 30px rgba(184,146,255,0.5); }
+    50% { box-shadow: 0 14px 40px rgba(184,146,255,0.6); }
+    100% { box-shadow: 0 10px 30px rgba(184,146,255,0.5); }
 }
 
 /* Success message */
@@ -178,7 +173,7 @@ a { text-decoration: underline; color: #b892ff; }
             <input type="radio" name="Request Type" value="Manage Preferences/Reduce Frequency" id="manage-preferences">
         </div>
 
-        <label for="feedback" style="margin-top:10px;">Optional Feedback / Message</label>
+        <label for="feedback">Optional Feedback / Message</label>
         <textarea name="Feedback" id="feedback" rows="3" placeholder="Optional message or preferences"></textarea>
 
         <div class="submit-wrapper">
@@ -199,7 +194,7 @@ a { text-decoration: underline; color: #b892ff; }
 </div>
 
 <script>
-// Form Submission
+// Form submission
 document.getElementById('preferenceForm').addEventListener('submit', async function(e){
     e.preventDefault();
     const form = e.target;
@@ -212,34 +207,4 @@ document.getElementById('preferenceForm').addEventListener('submit', async funct
     const formData = new FormData(form);
 
     try {
-        const response = await fetch(form.action, { method: form.method, body: formData });
-        if (response.ok || response.status === 200 || response.status === 302) {
-            successMessage.classList.add('show');
-            form.reset();
-            setTimeout(()=>{ successMessage.classList.remove('show'); },5000);
-        } else {
-            alert('Submission failed. Try again.');
-        }
-    } catch {
-        alert('Network error. Please try again.');
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
-});
-
-// Joke Widget
-const JOKE_URL = "https://raw.githubusercontent.com/bdmdave/David-s-Laugh-Hub/main/jokes.json";
-document.getElementById("laugh-widget").addEventListener("click", async () => {
-  try {
-    const res = await fetch(JOKE_URL);
-    const jokes = await res.json();
-    const visible = jokes.filter(j => j.visible !== false);
-    const random = visible[Math.floor(Math.random() * visible.length)];
-    alert(random.text || "No jokes available 😅");
-  } catch { alert("Could not fetch a joke."); }
-});
-</script>
-
-</body>
-</html>
+        const response = await fetch(form
