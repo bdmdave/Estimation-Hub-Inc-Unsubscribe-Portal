@@ -5,21 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manage Email Preferences | Estimation Hub Inc</title>
 <style>
-/* Base & Font */
 body {
     font-family: Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background: #f7e6f2;
-    overflow-x: hidden;
-    position: relative;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Floating Gradient Blobs */
+/* Floating blobs */
 .blob {
     position: absolute;
     border-radius: 50%;
@@ -28,11 +27,11 @@ body {
     animation: float 15s infinite alternate ease-in-out;
     z-index: -1;
 }
-.blob1 { width:400px; height:400px; background:linear-gradient(135deg,#00fff7,#3b00ff); top:-100px; left:-100px; }
-.blob2 { width:300px; height:300px; background:linear-gradient(135deg,#3b00ff,#00fff7); bottom:-80px; right:-80px; animation-duration:18s; }
-@keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-30px) translateX(20px);} 100%{transform:translateY(0) translateX(0);} }
+.blob1 { width:400px; height:400px; background:linear-gradient(135deg,#f7c4ff,#b892ff); top:-100px; left:-100px; }
+.blob2 { width:300px; height:300px; background:linear-gradient(135deg,#b892ff,#f7c4ff); bottom:-80px; right:-80px; animation-duration:18s; }
+@keyframes float {0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-30px) translateX(20px);}100%{transform:translateY(0) translateX(0);}}
 
-/* Glass Card */
+/* Glass card */
 .glass-card {
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(20px);
@@ -42,112 +41,126 @@ body {
     padding: 2rem;
     width: 100%;
     max-width: 600px;
-    border-top: 8px solid #3b00ff;
+    border-top: 8px solid #b892ff;
     transition: all 0.3s ease-in-out;
 }
 
 /* Headers */
-h1, h2 { font-weight: bold; text-align: center; }
-h1 span { color: #00fff7; }
+h1 { font-weight: bold; text-align: center; }
+h1 span { color: #b892ff; }
+p.subtitle { text-align:center; color:#6e6170; margin-top:5px; }
 
-/* Buttons */
+/* Inputs and textarea */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
+    transition: all 0.3s;
+}
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #b892ff;
+    background: rgba(255,255,255,0.35);
+    box-shadow: 0 0 15px rgba(184,146,255,0.4);
+}
+
+/* Radio cards: label left, circle right */
+.radio-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.radio-card:hover {
+    background: rgba(255,255,255,0.25);
+    border-color: #b892ff;
+    box-shadow: 0 4px 15px rgba(184,146,255,0.4);
+}
+.radio-card label {
+    cursor: pointer;
+    flex: 1;
+    color: #2b2030;
+}
+.radio-card input {
+    margin-left: 10px;
+}
+
+/* Submit button right-aligned with hover glow */
+.submit-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
 .btn-primary {
-    background: linear-gradient(90deg, #00fff7, #3b00ff);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(90deg,#f7c4ff,#b892ff);
     color: #fff;
     font-weight: 600;
-    border-radius: 12px;
-    border: none;
     cursor: pointer;
-    width: 100%;
-    padding: 12px;
+    box-shadow: 0 4px 15px rgba(184,146,255,0.3);
     transition: all 0.3s ease-in-out;
 }
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0,191,255,0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(184,146,255,0.6);
     animation: pulse 1.2s infinite;
 }
 @keyframes pulse {
-    0%{box-shadow:0 6px 20px rgba(0,191,255,0.5);}
-    50%{box-shadow:0 10px 25px rgba(0,191,255,0.6);}
-    100%{box-shadow:0 6px 20px rgba(0,191,255,0.5);}
-}
-
-/* Inputs & Textarea */
-input, textarea {
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.25);
-    padding: 10px;
-    width: 100%;
-    margin-top: 4px;
-    transition: all 0.25s ease-in-out;
-}
-input:focus, textarea:focus {
-    border-color: #00fff7;
-    background: rgba(255,255,255,0.35);
-    outline: none;
-    box-shadow: 0 0 15px rgba(0,255,247,0.4);
-    transform: scale(1.02);
-}
-
-/* Radio Cards */
-.radio-card {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.3);
-    margin-top: 5px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-.radio-card:hover, .radio-card input:focus + label {
-    background: rgba(255,255,255,0.25);
-    border-color: #00fff7;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,191,255,0.3);
+    0% { box-shadow: 0 8px 25px rgba(184,146,255,0.6); }
+    50% { box-shadow: 0 12px 35px rgba(184,146,255,0.7); }
+    100% { box-shadow: 0 8px 25px rgba(184,146,255,0.6); }
 }
 
 /* Success message */
 .success-message {
     display: none;
     background: rgba(255,255,255,0.15);
-    border-left: 4px solid #00fff7;
-    color: #00bfff;
+    border-left: 4px solid #b892ff;
+    color: #b892ff;
     border-radius: 12px;
     padding: 1rem;
     margin-bottom: 1rem;
     opacity: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s;
 }
-.success-message.show { opacity:1; animation: fadeIn 0.5s forwards; }
-@keyframes fadeIn { 0%{opacity:0;transform:translateY(-10px);} 100%{opacity:1;transform:translateY(0);} }
+.success-message.show { opacity:1; }
 
-/* Footer Links */
-a { text-decoration: underline; color: #00fff7; }
+/* Footer links */
+a { text-decoration: underline; color: #b892ff; }
 
+/* Mobile adjustments */
+@media (max-width:480px){
+    .glass-card { padding:1rem; }
+    .blob1, .blob2 { width:200px;height:200px; }
+    .submit-wrapper { justify-content: center; }
+}
 </style>
 </head>
-<body class="soft-bg">
+<body>
 
-<!-- Blobs -->
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
 
 <div class="glass-card">
-    <header class="mb-6">
-        <h1>Manage Your <span>Email Status</span></h1>
-        <p style="text-align:center; color:#6e6170; margin-top:5px;">from Estimation Hub Inc.</p>
-    </header>
+    <h1>Manage Your <span>Email Status</span></h1>
+    <p class="subtitle">from Estimation Hub Inc.</p>
 
-    <!-- Success Message -->
-    <div id="success-message" class="success-message" role="alert">
+    <div id="success-message" class="success-message">
         <p><strong>Success!</strong> Request Submitted.</p>
         <p>Your request has been prioritized and assigned to David's team.</p>
     </div>
 
-    <!-- Form -->
     <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
@@ -155,23 +168,24 @@ a { text-decoration: underline; color: #00fff7; }
         <label for="email">Your Email Address</label>
         <input type="email" name="Email" id="email" placeholder="Enter your email" required>
 
-        <label style="margin-top:10px;">Select Request Type</label>
         <div class="radio-card">
+            <label for="unsubscribe">Unsubscribe from All Future Emails</label>
             <input type="radio" name="Request Type" value="Unsubscribe from All" id="unsubscribe" required>
-            <label for="unsubscribe" style="margin-left:8px;">Unsubscribe from All Future Emails</label>
         </div>
+
         <div class="radio-card">
+            <label for="manage-preferences">Manage Preferences (reduce frequency)</label>
             <input type="radio" name="Request Type" value="Manage Preferences/Reduce Frequency" id="manage-preferences">
-            <label for="manage-preferences" style="margin-left:8px;">Manage Preferences (reduce frequency)</label>
         </div>
 
         <label for="feedback" style="margin-top:10px;">Optional Feedback / Message</label>
         <textarea name="Feedback" id="feedback" rows="3" placeholder="Optional message or preferences"></textarea>
 
-        <button type="submit" class="btn-primary" style="margin-top:12px;">Submit Request</button>
+        <div class="submit-wrapper">
+            <button type="submit" class="btn-primary">Submit Request</button>
+        </div>
     </form>
 
-    <!-- Footer -->
     <div style="margin-top:20px; text-align:center; font-size:0.9rem; color:#6e6170;">
         <p>Provided by <strong>Estimation Hub Inc.</strong></p>
         <p>Contact <strong>David</strong> at <a href="mailto:david@estimationhubinc.com">david@estimationhubinc.com</a></p>
@@ -180,7 +194,7 @@ a { text-decoration: underline; color: #00fff7; }
 </div>
 
 <!-- Joke Widget -->
-<div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#00fff7,#3b00ff);color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);">
+<div id="laugh-widget" style="position:fixed;bottom:15px;right:15px;background:linear-gradient(90deg,#f7c4ff,#b892ff);color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,0.2);">
     😂 Quick Laugh
 </div>
 
