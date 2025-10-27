@@ -231,6 +231,8 @@ textarea {
     <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Thank you! Your request has been received and will be processed shortly.">
 
         <div class="form-group">
             <label for="email">Email Address</label>
@@ -264,43 +266,11 @@ textarea {
 
 
 <script>
-// Form submission
-document.getElementById('preferenceForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const form = e.target;
-    const submitBtn = form.querySelector('.btn-submit');
-    const originalText = submitBtn.textContent;
+// Form submission - just submit normally without JavaScript interception
+document.getElementById('preferenceForm').addEventListener('submit', function(e){
+    const submitBtn = this.querySelector('.btn-submit');
     submitBtn.textContent = '⏳ Sending...';
     submitBtn.disabled = true;
-    const successMessage = document.getElementById('success-message');
-    const formData = new FormData(form);
-    
-    try {
-        const response = await fetch(form.action, {
-            method: form.method,
-            body: formData
-        });
-        
-        if(response.ok || response.status === 200 || response.status === 302){
-            successMessage.classList.add('show');
-            form.reset();
-            submitBtn.textContent = '✓ Submitted!';
-            
-            setTimeout(() => { 
-                successMessage.classList.remove('show');
-                submitBtn.textContent = originalText;
-            }, 4000);
-        } else {
-            submitBtn.textContent = '✗ Failed - Try Again';
-        }
-    } catch(error) { 
-        submitBtn.textContent = '✗ Network Error';
-    } finally { 
-        submitBtn.disabled = false;
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-        }, 3000);
-    }
 });
 
 </script>
