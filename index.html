@@ -1,279 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manage Email Preferences | Estimation Hub Inc</title>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #f5f7fa;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem 2rem;
-    width: 100%;
-    max-width: 500px;
-}
-
-/* Header */
-.header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-h1 { 
-    font-size: 2rem; 
-    font-weight: 700;
-    color: #1a202c;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
-}
-
-h1 .highlight { 
-    color: #667eea;
-}
-
-.subtitle { 
-    color: #718096; 
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
-/* Form styling */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-input[type="email"], textarea {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    font-family: inherit;
-    background: #f7fafc;
-}
-
-input[type="email"]:focus, textarea:focus {
-    outline: none;
-    border-color: #667eea;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-/* Radio options */
-.radio-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.radio-option {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.25rem;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: #f7fafc;
-    position: relative;
-}
-
-.radio-option:hover {
-    border-color: #667eea;
-    background: white;
-    transform: translateX(4px);
-}
-
-.radio-option input[type="radio"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 1rem;
-    cursor: pointer;
-    accent-color: #667eea;
-}
-
-.radio-option label {
-    margin: 0;
-    flex: 1;
-    cursor: pointer;
-    text-transform: none;
-    letter-spacing: normal;
-    font-weight: 500;
-    color: #2d3748;
-    font-size: 0.95rem;
-}
-
-/* Submit button */
-.btn-submit {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1.5rem;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-}
-
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-}
-
-.btn-submit:active {
-    transform: translateY(0);
-}
-
-.btn-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Success message */
-.success-message {
-    display: none;
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-    color: white;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    animation: slideDown 0.4s ease;
-}
-
-.success-message.show { 
-    display: block;
-}
-
-.success-message p {
-    line-height: 1.5;
-    margin: 0.25rem 0;
-}
-
-.success-message strong {
-    font-weight: 700;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-/* Mobile responsive */
-@media(max-width: 600px){
-    .container { 
-        padding: 2rem 1.5rem;
-        margin: 1rem;
-    }
-    
-    h1 { 
-        font-size: 1.6rem;
-    }
-    
-
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Email Preferences | Estimation Hub Inc</title>
+    <!-- Using Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-<div class="container">
-    <div class="header">
-        <h1>Manage Your <span class="highlight">Email Preferences</span></h1>
-        <p class="subtitle">Estimation Hub Inc.</p>
-    </div>
-
-    <div id="success-message" class="success-message">
-        <p><strong>✓ Success!</strong> Request Submitted.</p>
-        <p>Your request has been prioritized and assigned to David's team.</p>
-    </div>
-
-    <form id="preferenceForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="ACTION REQUIRED: Email Preference/Unsubscribe Request">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="Thank you! Your request has been received and will be processed shortly.">
-
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" name="Email" id="email" placeholder="you@company.com" required>
+    <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg m-4">
+        
+        <!-- Header Section -->
+        <div class="text-center">
+            <h1 class="text-2xl font-bold text-gray-900">Manage Your Email Preferences</h1>
+            <p class="mt-2 text-sm text-gray-600">Estimation Hub Inc.</p>
         </div>
 
-        <div class="form-group">
-            <label>Select Your Preference</label>
-            <div class="radio-options">
-                <div class="radio-option">
-                    <input type="radio" name="Request Type" value="Unsubscribe from All" id="unsubscribe" required>
-                    <label for="unsubscribe">Unsubscribe from All Future Emails</label>
-                </div>
+        <!-- Form Section -->
+        <!-- 
+          FIX: 
+          1. Added method="POST"
+          2. Set action="https://formsubmit.co/david@estimationhubinc.com"
+          3. Added name attributes to all form fields.
+          4. Added _next hidden field to redirect to a thank-you page.
+          5. Added _subject hidden field for a cleaner email subject.
+        -->
+        <form id="unsubscribeForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
 
-                <div class="radio-option">
-                    <input type="radio" name="Request Type" value="Manage Preferences/Reduce Frequency" id="manage-preferences">
-                    <label for="manage-preferences">Manage Preferences (reduce frequency)</label>
-                </div>
+            <!-- Email Address -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    required
+                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="you@example.com"
+                >
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="feedback">Additional Comments (Optional)</label>
-            <textarea name="Feedback" id="feedback" placeholder="Share any feedback or specific preferences..."></textarea>
-        </div>
+            <!-- Preference Selection -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Select Your Preference</label>
+                <fieldset class="mt-2 space-y-3">
+                    <!-- Unsubscribe from All -->
+                    <div class="flex items-center p-3 bg-gray-50 border rounded-lg">
+                        <input 
+                            id="unsubscribe_all" 
+                            name="preference" 
+                            type="radio"
+                            value="Unsubscribe from All Future Emails"
+                            required
+                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                        >
+                        <label for="unsubscribe_all" class="ml-3 block text-sm font-medium text-gray-900">
+                            Unsubscribe from All Future Emails
+                        </label>
+                    </div>
+                    <!-- Manage Preferences -->
+                    <div class="flex items-center p-3 bg-gray-50 border rounded-lg">
+                        <input 
+                            id="manage_prefs" 
+                            name="preference" 
+                            type="radio"
+                            value="Manage Preferences (reduce frequency)"
+                            required
+                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
+                        >
+                        <label for="manage_prefs" class="ml-3 block text-sm font-medium text-gray-900">
+                            Manage Preferences (reduce frequency)
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
 
-        <button type="submit" class="btn-submit">Submit Request</button>
-    </form>
-</div>
+            <!-- Additional Comments -->
+            <div>
+                <label for="comments" class="block text-sm font-medium text-gray-700">
+                    Additional Comments <span class="text-gray-500">(Optional)</span>
+                </label>
+                <textarea 
+                    id="comments" 
+                    name="comments" 
+                    rows="3"
+                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="Let us know if you have any specific feedback..."
+                ></textarea>
+            </div>
 
+            <!-- FormSubmit.co Hidden Fields -->
+            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thank-you.html">
+            <input type="hidden" name="_subject" value="Email Preference Request - Estimation Hub Inc.">
+            
+            <!-- Submit Button -->
+            <div>
+                <button 
+                    type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                >
+                    Submit Request
+                </button>
+            </div>
+        </form>
 
-
-<script>
-// Form submission - just submit normally without JavaScript interception
-document.getElementById('preferenceForm').addEventListener('submit', function(e){
-    const submitBtn = this.querySelector('.btn-submit');
-    submitBtn.textContent = '⏳ Sending...';
-    submitBtn.disabled = true;
-});
-
-</script>
+    </div>
 
 </body>
 </html>
