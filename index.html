@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Email Preferences | Estimation Hub Inc</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +15,7 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
     <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg m-4">
-        
+
         <!-- Header Section -->
         <div class="text-center">
             <h1 class="text-2xl font-bold text-gray-900">Manage Your Email Preferences</h1>
@@ -24,15 +23,15 @@
         </div>
 
         <!-- Form Section -->
-        <form id="unsubscribeForm" action="https://formsubmit.co/el/your-custom-key" method="POST" class="space-y-6">
+        <form id="unsubscribeForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
 
-            <!-- Honeypot field (hidden) -->
+            <!-- Honeypot field (hidden for bots) -->
             <input type="text" name="_honey" style="display:none">
-            
+
             <!-- Redirect after submission -->
             <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thank-you.html">
             <input type="hidden" name="_subject" value="Email Preference Request - Estimation Hub Inc.">
-            
+
             <!-- Email Address -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
