@@ -1,109 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Email Preferences | Estimation Hub Inc</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Email Preferences | Estimation Hub Inc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body { 
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
     </style>
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-
-    <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg m-4">
-
-        <!-- Header Section -->
-        <div class="text-center">
-            <h1 class="text-2xl font-bold text-gray-900">Manage Your Email Preferences</h1>
-            <p class="mt-2 text-sm text-gray-600">Estimation Hub Inc.</p>
-        </div>
-
-        <!-- Form Section -->
-        <form id="unsubscribeForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6">
-
-            <!-- Honeypot field (hidden for bots) -->
-            <input type="text" name="_honey" style="display:none">
-
-            <!-- Redirect after submission -->
-            <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thank-you.html">
-            <input type="hidden" name="_subject" value="Email Preference Request - Estimation Hub Inc.">
-
-            <!-- Email Address -->
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    required
-                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="you@example.com"
-                >
-            </div>
-
-            <!-- Preference Selection -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Select Your Preference</label>
-                <fieldset class="mt-2 space-y-3">
-                    <div class="flex items-center p-3 bg-gray-50 border rounded-lg">
-                        <input 
-                            id="unsubscribe_all" 
-                            name="preference" 
-                            type="radio"
-                            value="Unsubscribe from All Future Emails"
-                            required
-                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                        >
-                        <label for="unsubscribe_all" class="ml-3 block text-sm font-medium text-gray-900">
-                            Unsubscribe from All Future Emails
-                        </label>
-                    </div>
-                    <div class="flex items-center p-3 bg-gray-50 border rounded-lg">
-                        <input 
-                            id="manage_prefs" 
-                            name="preference" 
-                            type="radio"
-                            value="Manage Preferences (reduce frequency)"
-                            required
-                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300"
-                        >
-                        <label for="manage_prefs" class="ml-3 block text-sm font-medium text-gray-900">
-                            Manage Preferences (reduce frequency)
-                        </label>
-                    </div>
-                </fieldset>
-            </div>
-
-            <!-- Additional Comments -->
-            <div>
-                <label for="comments" class="block text-sm font-medium text-gray-700">
-                    Additional Comments <span class="text-gray-500">(Optional)</span>
-                </label>
-                <textarea 
-                    id="comments" 
-                    name="comments" 
-                    rows="3"
-                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                    placeholder="Let us know if you have any specific feedback..."
-                ></textarea>
-            </div>
-
-            <!-- Submit Button -->
-            <div>
-                <button 
-                    type="submit"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-                >
-                    Submit Request
-                </button>
-            </div>
-        </form>
-
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="bg-blue-50 flex items-center justify-center min-h-full">
+  <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-xl border border-blue-100 m-4"><!-- Header Section -->
+   <div class="text-center">
+    <div class="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+     <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+     </svg>
     </div>
-
-</body>
+    <h1 class="text-2xl font-bold text-blue-900">Manage Your Email Preferences</h1>
+    <p class="mt-2 text-sm text-blue-600">Estimation Hub Inc.</p>
+   </div><!-- Form Section -->
+   <form id="unsubscribeForm" action="https://formsubmit.co/david@estimationhubinc.com" method="POST" class="space-y-6"><!-- Honeypot field (hidden for bots) --> <input type="text" name="_honey" style="display:none"> <!-- Redirect after submission --> <input type="hidden" name="_next" value="https://bdmdave.github.io/Estimation-Hub-Inc-Unsubscribe-Portal/thank-you.html"> <input type="hidden" name="_subject" value="Email Preference Request - Estimation Hub Inc."> <!-- Email Address -->
+    <div><label for="email" class="flex items-center text-sm font-medium text-blue-700">
+      <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+      </svg> Email Address </label>
+     <div class="relative mt-1"><input type="email" name="email" id="email" required class="block w-full pl-10 pr-4 py-3 bg-blue-50 border border-blue-200 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="you@example.com">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+       <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+       </svg>
+      </div>
+     </div>
+    </div><!-- Preference Selection -->
+    <div><label class="flex items-center text-sm font-medium text-blue-700">
+      <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg> Select Your Preference </label>
+     <fieldset class="mt-2 space-y-3">
+      <div class="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"><input id="unsubscribe_all" name="preference" type="radio" value="Unsubscribe from All Future Emails" required class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-blue-300">
+       <div class="ml-3 flex items-center">
+        <svg class="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364l12.728-12.728"></path>
+        </svg><label for="unsubscribe_all" class="block text-sm font-medium text-blue-900"> Unsubscribe from All Future Emails </label>
+       </div>
+      </div>
+      <div class="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"><input id="manage_prefs" name="preference" type="radio" value="Manage Preferences (reduce frequency)" required class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-blue-300">
+       <div class="ml-3 flex items-center">
+        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+        </svg><label for="manage_prefs" class="block text-sm font-medium text-blue-900"> Manage Preferences (reduce frequency) </label>
+       </div>
+      </div>
+     </fieldset>
+    </div><!-- Additional Comments -->
+    <div><label for="comments" class="flex items-center text-sm font-medium text-blue-700">
+      <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+      </svg> Additional Comments (Optional) </label> <textarea name="comments" id="comments" rows="3" class="mt-1 block w-full px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm resize-none" placeholder="Let us know why you're unsubscribing or how we can improve..."></textarea>
+    </div><!-- Submit Button -->
+    <div><button type="submit" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+      </svg> Submit Request </button>
+    </div>
+   </form><!-- Footer -->
+   <div class="text-center border-t border-blue-100 pt-4">
+    <div class="flex items-center justify-center mb-2">
+     <svg class="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+     </svg>
+     <p class="text-xs text-blue-500">We respect your privacy and will process your request within 24 hours. Service provider: David Alonso</p>
+    </div>
+   </div>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9994898c069f5b2e',t:'MTc2MjI2Mzc3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
